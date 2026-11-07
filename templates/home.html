@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task_Manager</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <header>
+        <section id="id1">
+            <br>
+            <div class="div1"><h4>STAY FOCUSED</h4></div><br>
+            <div class="div1"><h1>My Task <br>Manager</h1></div>
+            <br>
+            <div class="div1"><h3>Plan your Work.Complete one task at a time.</h3></div>
+        </section>
+    </header>
+    <main>
+        <div>
+        <section class="box1">
+        <h2 id="id4">Add a new task</h2>
+        <form action="/" method="post">
+            <input type="text" placeholder="What do you need to do?" name="task" class="box2">
+            <button type="submit" class="box3">Add Task</button>
+
+        </form>
+        </section>
+        </div>
+        <section class="box5">
+        
+    <h2 id="id8">Your tasks</h2>
+    {% if result %}
+        {% for i in result %}
+        <div class="box7">
+            <div>
+                <h3 class="id15">{{ i.title }}</h3>
+                <p class="id15">{% if i.completed %}completed{% else %}pending{% endif %}</p>
+            </div>
+            {% if not i.completed %}
+            <form action="/task/{{ i.id }}/complete" method="post">
+                <button type="submit" class="bottom">complete</button>
+            </form>
+            {% endif %}
+            <form action="/task/{{ i.id }}/delete" method="post">
+                <button type="submit" class="bottom1">delete</button>
+            </form>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p>No tasks yet.</p>
+    {% endif %}
+</section>
+
+        
+    </main>
+    <footer>
+        <p id="id2">&copy; 2026 Task Manager</p>
+    </footer>
+
+    
+</body>
+</html>
